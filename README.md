@@ -1,28 +1,25 @@
-CRIAÇÃO DO MERCEARIA DO SQL  
-CREATE TABLE CLIENTE -- criação da tabela Clientes   
-(ID_Cliente INTEGER NOT NULL,   
-Nome_Cliente VARCHAR(60) NULL,   
-Endereco_Cliente VARCHAR(60) NULL  
-PRIMARY KEY (ID_Cliente));  
+CRIAÇÃO DO EMPRESTIMO DO SQL  
+CREATE TABLE LIVRO  
+(Nome_Livro VARCHAR(70) NULL,  
+Copia_Livro INTEGER NOT NULL,  
+Status_Livro VARCHAR(20) NULL,  
+PRIMARY KEY(Copia_Livro));  
 
-CREATE TABLE PEDIDO -- criação da tabela Pedido  
-(Numero_Pedido integer PRIMARY KEY,  
-Datahora datetime NOT NULL,  
-ID_Cliente integer,  
-CONSTRAINT fk_ID_Cliente FOREIGN KEY (ID_Cliente) REFERENCES CLIENTE (ID_Cliente));  
+CREATE TABLE CLIENTE  
+(ID_Cliente INT IDENTITY(1,1) PRIMARY KEY,  
+Nome_Cliente VARCHAR(70) NOT NULL,  
+Telefone_Cliente VARCHAR(20) NULL,)  
 
-CREATE TABLE PRODUTO -- criação da tabela Produto  
-(ID_Produto INTEGER PRIMARY KEY,  
-Nome_Produto VARCHAR(60) NULL);  
+CREATE TABLE EMPRESTIMO  
+(ID_Emprestimo INT IDENTITY(1,1) PRIMARY KEY,  
+Copia_Livro integer,  
+CONSTRAINT fk_Copia_Livro FOREIGN KEY (Copia_Livro) REFERENCES LIVRO (Copia_Livro),  
+ID_Cliente integer not null,  
+CONSTRAINT fk_ID_Cliente FOREIGN KEY (ID_Cliente) REFERENCES CLIENTE (ID_Cliente),  
+Livro VARCHAR(70) NULL,  
+Copia INTEGER NOT NULL,  
+Data_Emprestimo date NOT NULL,  
+Data_Devolucao_Proposta datetime NOT NULL,  
+Data_Devolucao_Efetiva datetime NOT NULL,  
+Multa integer )  
 
-CREATE TABLE ITEM_PEDIDO -- criação Item pedido  
-(NUMERO_PEDIDO INTEGER,  
-ID_PRODUTO INTEGER,  
-QTDE INTEGER NOT NULL,  
-CONSTRAINT FK_ID_PRODUTO FOREIGN KEY (ID_PRODUTO) REFERENCES PRODUTO (ID_PRODUTO),  
-CONSTRAINT FK_NUMERO_PEDIDO FOREIGN KEY (NUMERO_PEDIDO) REFERENCES PEDIDO (NUMERO_PEDIDO));  
-
-CREATE TABLE TELEFONE -- criação da tabela telefone   
-(ID_CLIENTE INTEGER,  
-NUMERO INTEGER,  
-CONSTRAINT FK_ID_CLIETELL FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTE (ID_CLIENTE));  
